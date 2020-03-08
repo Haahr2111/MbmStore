@@ -1,0 +1,100 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@{
+    ViewData["Title"] = "Index";
+
+}
+@using MbmStore.Models;
+@using MbmStore.Infrastructure;
+
+<a asp-controller="Home" asp-action="Index">Home</a>
+
+<!--
+@*foreach (Book books in ViewBag.books)
+{
+    <p><b>Title:@books.Title</b></p>
+    <p><b>Author:@books.Author</b></p>
+    <p><b>Price:@books.Price</b></p>
+    <p><b>Publisher:@books.Publisher @books.Published</b></p>
+    <p><b>ISBN:@books.ISBN</b></p>
+    <img src="@books.Imageurl" alt="@books.Title" />
+}
+
+<h3>CD's</h3>
+
+@foreach (MusicCD cd in ViewBag.musiclist)
+{
+    <p><b>Title:@cd.Title</b></p>
+    <p><b>Artist:@cd.Artist</b></p>
+    <p><b>Price:@cd.Price</b></p>
+    <p><b>Publisher:@cd.Label @cd.Publiced</b></p>
+
+    <img src="@cd.Imageurl" alt="@cd.Title" />
+
+<h3>Tracks</h3>
+
+<ol>
+    @foreach (Track track in cd.Tracks)
+    {
+    <li>@track.Title (@track.Composer) @track.Length.Minutes:@track.Length.Seconds</li>
+    }
+
+</ol>
+
+<h4>Total Playing: @cd.GetPlayingTime()</h4>
+
+}
+*@
+ -->
+
+@foreach (Product product in ViewBag.Products)
+{
+    if (product is Movie)
+    {
+        Movie film = (Movie)product;
+<div>
+    <h1>The Movies</h1>
+    <h2>@film.Title</h2>
+    <h4>Director: @film.Director</h4>
+    <p>Price: @String.Format("{0:0.00}", film.Price)</p>
+    <img src="@film.Imageurl" alt="@film.Title" />
+</div>
+    }
+    // ... and likewise for Book and MusicCD
+    if (product is Book)
+    {
+        Book book = (Book)product;
+        <div>
+        <h1>Books</h1>
+        <p><b>Title:@book.Title</b></p>
+        <p><b>Author:@book.Author</b></p>
+        <p><b>Price:@book.Price</b></p>
+        <p><b>Publisher:@book.Publisher @book.Published</b></p>
+        <p><b>ISBN:@book.ISBN</b></p>
+        <img src="@book.Imageurl" alt="@book.Title" />
+        </div>
+    }
+    if (product is MusicCD)
+    {
+        MusicCD cd = (MusicCD)product;
+        <div>
+            <p><b>Title:@cd.Title</b></p>
+            <p><b>Artist:@cd.Artist</b></p>
+            <p><b>Price:@cd.Price</b></p>
+            <p><b>Publisher:@cd.Label @cd.Publiced</b></p>
+
+            <img src="@cd.Imageurl" alt="@cd.Title" />
+
+            <h3>Tracks</h3>
+
+            <ol>
+                @foreach (Track track in cd.Tracks)
+                {
+                    <li>@track.Title (@track.Composer) @track.Length.Minutes:@track.Length.Seconds</li>
+                }
+
+            </ol>
+
+            <h4>Total Playing: @cd.GetPlayingTime()</h4>
+        </div>
+    }
+}

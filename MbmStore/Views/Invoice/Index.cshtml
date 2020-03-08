@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@using MbmStore.Models;
+@using MbmStore.Infrastructure;
+<style>
+    div {
+        float:left;
+        margin-right: 20px;
+    }
+</style>
+<h1>Invoices</h1>
+
+
+@foreach (Invoice invoice in ViewBag.invoice)
+{
+<div>
+    <div>
+        <p><b>Custumer</b></p>
+        <p>@invoice.Custumer.FirstName @invoice.Custumer.LastName</p>
+    </div>
+    <div>
+        <p><b>Product</b></p>
+
+        @foreach (OrderItem product in invoice.Items)
+        {
+            if (product.Product is MusicCD)
+            {
+                MusicCD cd = (MusicCD)product.Product;
+                <p>@cd.Title - @cd.Artist</p>
+            }
+
+
+            if (product.Product is Movie)
+            {
+                Movie film = (Movie)product.Product;
+                <p>@film.Title - @film.Director</p>
+            }
+            if (product.Product is Book)
+            {
+                Book book = (Book)product.Product;
+                <p>@book.Title - @book.Author</p>
+            }
+
+        }
+    </div>
+    <div>
+        <p><b>Price</b></p>
+
+        @foreach (OrderItem product in invoice.Items)
+        {
+            <p>@product.Product.Price kr.</p>
+        }
+    </div>
+</div>
+    }

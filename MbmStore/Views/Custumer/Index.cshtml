@@ -1,0 +1,25 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@{
+    ViewData["Title"] = "Index";
+
+}
+@using MbmStore.Models;
+
+<a asp-controller="Home" asp-action="Index">Home</a>
+
+<h1>Customers</h1>
+@foreach (Custumer costomers in ViewBag.custumers)
+{
+
+
+    <h4> @costomers.FirstName @costomers.LastName </h4>
+    <p>
+        <b>Address:</b> @costomers.Address <br /> <b> City:</b> @costomers.City <br /> <b>Zip:</b> @costomers.Zip <br />
+        <br />
+        <b>Birthday</b>@costomers.Birthdate
+        <b>Phone</b> @String.Join(", ", costomers.PhoneNumbers)
+    </p>
+
+
+}
+
